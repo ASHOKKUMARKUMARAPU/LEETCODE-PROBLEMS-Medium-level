@@ -1,0 +1,36 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        
+        # Handle Division By Zero
+        if divisor == 0:
+            return 2**31-1
+
+        #Handle Overflow Case
+        if divisor == -1 and dividend == -2**31:
+            return 2**31-1
+
+        #Getting Sign of the Result
+        sign = 1
+        if dividend < 1 :
+            dividend = -dividend
+            sign = -sign
+        if divisor < 1:
+            divisor = -divisor
+            sign = -sign
+
+        #Finding largest Multiple of the Divisor that is less than/ equal to Dividend
+        multiple = 1
+        while dividend >= divisor :
+            divisor <<=1
+            multiple <<=1
+
+        #Perform division Using Binary Search
+        quotient = 0
+        while multiple > 0:
+            if dividend >= divisor:
+                dividend -= divisor
+                quotient += multiple
+            divisor >>=1
+            multiple >>=1
+
+        return sign*quotient
