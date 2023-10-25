@@ -1,0 +1,15 @@
+class Solution:
+    def groupThePeople(self, groupSizes: List[int]) -> List[List[int]]:
+        res = []
+        dict1 = {}
+
+        for i,v in enumerate(groupSizes):
+            if v not in dict1:
+                dict1[v] = [i]
+            else:
+                dict1[v].append(i)
+
+            if len(dict1[v]) == v:
+                res.append(dict1.pop(v))
+
+        return res
